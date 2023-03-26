@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+    .font-outline-2 {
+      -webkit-text-stroke: 2px red;
+    }
+    .font-outline-4 {
+      -webkit-text-stroke: 4px red;
+    }
+  }
+
+html {
+  background-color: #080808;
+  /* opacity: 0.8; */
+  background: linear-gradient(135deg, #00000055 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #000000 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #00000055 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #000000 25%, #080808 25%) 0px 0/ 20px 20px;
+}
+
+.slick-prev {
+    left: 3% !important;
+    z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
+.slick-dots {
+  bottom: 3%;
+}
