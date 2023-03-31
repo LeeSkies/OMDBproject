@@ -1,54 +1,78 @@
-import React from 'react'
-import Slider from 'react-slick'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React, { useEffect, useState } from 'react'
 import * as hi2 from 'react-icons/hi2'
+import { NavLink } from 'react-router-dom'
+import { SlideDetails } from '../assets/SlideDetails'
 
-  const CustomSlider = ({ children, settings }) => (
-    <Slider {...settings}>
-      {children}
-    </Slider>
-  );
-
-  const RightArrow = ({ className, style, onClick }) => (
-  <button onClick={onClick} className={className} style={{...style}}>
-    <hi2.HiChevronRight />
-  </button>
-);
-
-const LeftArrow = ({ className, style, onClick }) => (
-  <button onClick={onClick} className={className} style={{...style, backgroundColor: 'black'}}>
-    <hi2.HiChevronLeft />
-  </button>
-);
-
-export const Slide = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    cssEase: "linear",
-  };
+export const Slide = ({ images, Right, Left, Button, Time }) => {
   
-  const images = [
-    'https://img.zoechip.com/resize/1278x768/aa/33/aa339e48d99bfc4c962ea95dbe5f0fa7/aa339e48d99bfc4c962ea95dbe5f0fa7.jpg',
-    'https://img.zoechip.com/resize/1278x768/f6/23/f623deaea2107717d129a52cd6f72252/f623deaea2107717d129a52cd6f72252.jpg',
-    'https://img.zoechip.com/resize/1278x768/64/54/6454697be5467e53604ec0887b733a7d/6454697be5467e53604ec0887b733a7d.jpg',
-  ];
+  // states
+  const [index, setIndex] = useState(0)
+  
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, Time? Time : 3000);
+
+    return () => clearInterval(intervalId);
+  }, [images]);
 
   return (
-    <div>  
-      <CustomSlider settings={settings}>
+    <section className='w-full overflow-hidden bg-transparent relative h-auto xl:h-[90vh]'>
+      <div className='absolute w-screen h-full bg-transparent flex justify-between items-center p-10 z-10'>
+        <button
+          onClick={() =>
+            setIndex((index) => (index === 0 ? images.length - 1 : index - 1))
+          }
+          className='rounded-full p-4 opacity-70 hover:opacity-100'
+        >
+          {Left? Left : <hi2.HiChevronLeft className='h-10 w-10' />}
+        </button>
+        <button
+          onClick={() => setIndex((index) => (index + 1) % images.length)}
+          className='rounded-full p-4 opacity-70 hover:opacity-100'
+        >
+          {Right? Right : <hi2.HiChevronRight className='h-10 w-10' />}
+        </button>
+      </div>
+      <article
+        className='h-full flex items-top transition-transform duration-1000'
+        style={{
+          transform: `translateX(-${index * 100/images.length}%)`,
+          width: `${images.length * 100}vw`,
+        }}
+      >
         {images.map((image, i) => (
-          <button key={i} className=''>
-            <img src={image} className='h-[70vh] w-full object-cover object-top' />
-          </button>
-        ))}  
-      </CustomSlider>
-    </div>
+          <div key={i} className='relative'>
+            <img
+              src={image}
+              
+              className='w-screen mx-auto'
+              alt={`Slider image ${i + 1}`}
+            />
+          </div>
+        ))}
+      </article>
+      <div className='absolute w-screen bg-transparent z-40 bottom-8 h-[20px] flex justify-center items-center'>
+      <NavLink to={`/movie/${SlideDetails[index].imdbID}`} className='hover:text-slate-900 duration-300 absolute bottom-40 p-8 backdrop-blur-sm rounded text-white left-40'>
+              <h1 className='text-4xl'>{SlideDetails[index].Title}</h1>
+              <div className="flex space-x-1 pt-2">
+                    {[...Array(10)].map((_, i) => i<SlideDetails[i]?.imdbRating && (
+                      <svg key={i} xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 fill-current ${i < SlideDetails[i]?.imdbRating ? 'text-yellow-400' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792 5.657 6.243.907-4.517 4.404 1.066 6.218" />
+                      </svg>
+                    ))}
+                    {(SlideDetails[index]?.imdbRating * 10) % 10 >=3 &&
+                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 fill-current text-yellow-400`} viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792" />
+                      </svg>
+                    }
+                </div>
+                <p className='mt-4 text-xl z-[60]'>Click for more details</p>
+            </NavLink>
+        {images.map((image, i) => 
+          {return Button ? Button : <button key={i} onClick={() => setIndex(i)} className={`mx-2 bg-slate-300 rounded-full ${i == index? ' border-[2px] border-slate-500 w-[17px] h-[17px]' : 'w-[15px] h-[15px]'}`}></button>}
+        )}
+      </div>
+    </section>
   );
-};
+}

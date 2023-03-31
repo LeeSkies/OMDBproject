@@ -16,10 +16,11 @@ export const Movie = () => {
   const stars = useMemo( () => new Array(10).fill(), [])
 
   useEffect(() => {
+    setMovie()
     fetchMovies()
-  }, [])
+  }, [id])
   return (
-    movie && <div className='h-screen w-full flex justify-center items-center text-slate-400'>
+    movie && <div className='h-full sm:h-screen w-full flex justify-center items-center text-slate-400'>
         <section className='flex md:w-8/12 w-10/12 max-sm:w-full border-black justify-between max-sm:flex-col max-sm:mb-20'>
             <figure className='xl:w-1/3 w-1/2 max-sm:w-full rounded overflow-clip'>
                 <img src={movie.Poster} className='w-full' />
