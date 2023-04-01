@@ -9,6 +9,8 @@ export const AppRoutes = () => {
     createRoutesFromElements(
         <Route path='/' element={<Header />}>
            <Route index element={<Home />}/>
+           <Route path='year/:YYYY' element={<Home />}/>
+           <Route path='search/:SearchQ' element={<Home />}/>
            <Route path='/movie/:id' element={<Movie />} />
         </Route>
     )

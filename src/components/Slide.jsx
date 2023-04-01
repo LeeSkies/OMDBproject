@@ -53,24 +53,24 @@ export const Slide = ({ images, Right, Left, Button, Time }) => {
         ))}
       </article>
       <div className='absolute w-screen bg-transparent z-40 bottom-8 h-[20px] flex justify-center items-center'>
-      <NavLink to={`/movie/${SlideDetails[index].imdbID}`} className='hover:text-slate-900 duration-300 absolute bottom-40 p-8 backdrop-blur-sm rounded text-white left-40'>
-              <h1 className='text-4xl'>{SlideDetails[index].Title}</h1>
-              <div className="flex space-x-1 pt-2">
-                    {[...Array(10)].map((_, i) => i<SlideDetails[i]?.imdbRating && (
-                      <svg key={i} xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 fill-current ${i < SlideDetails[i]?.imdbRating ? 'text-yellow-400' : ''}`} viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792 5.657 6.243.907-4.517 4.404 1.066 6.218" />
-                      </svg>
-                    ))}
-                    {(SlideDetails[index]?.imdbRating * 10) % 10 >=3 &&
-                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 fill-current text-yellow-400`} viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792" />
-                      </svg>
-                    }
-                </div>
-                <p className='mt-4 text-xl z-[60]'>Click for more details</p>
-            </NavLink>
+      <NavLink to={`/movie/${SlideDetails[index].imdbID}`} className='hover:text-slate-700 duration-300 absolute bottom-1/4 p-4 md:p-8 rounded text-slate-300  md:text-black left-4 sm:left-4'>
+          <h1 className='text-xl font-bold md:text-4xl'>{SlideDetails[index].Title}</h1>
+          <div className="flex space-x-1 pt-2">
+            {[...Array(10)].map((_, i) => i<SlideDetails[i]?.imdbRating && (
+              <svg key={i} xmlns="http://www.w3.org/2000/svg" className={`h-4 sm:h-5 w-4 sm:w-5 fill-current ${i < SlideDetails[i]?.imdbRating ? 'text-yellow-400' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792 5.657 6.243.907-4.517 4.404 1.066 6.218" />
+              </svg>
+            ))}
+            {(SlideDetails[index]?.imdbRating * 10) % 10 >=3 &&
+              <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 sm:h-5 w-4 sm:w-5 fill-current text-yellow-400`} viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792" />
+              </svg>
+            }
+          </div>
+          <p className='mt-2 text-sm sm:text-xl z-[60]'>Click for more details</p>
+      </NavLink>
         {images.map((image, i) => 
-          {return Button ? Button : <button key={i} onClick={() => setIndex(i)} className={`mx-2 bg-slate-300 rounded-full ${i == index? ' border-[2px] border-slate-500 w-[17px] h-[17px]' : 'w-[15px] h-[15px]'}`}></button>}
+          {return Button ? Button : <button key={i} onClick={() => setIndex(i)} className={`mx-2 z-50 bg-slate-300 rounded-full ${i == index? ' border-[2px] border-slate-500 w-[17px] h-[17px]' : 'w-[15px] h-[15px]'}`}></button>}
         )}
       </div>
     </section>
