@@ -21,7 +21,6 @@ export const Home = () => {
 
   useEffect(() => {
     fetchMovies()
-    if (YYYY || SearchQ)
     document.documentElement.scrollTop = 0;
   },[YYYY, SearchQ])
 
