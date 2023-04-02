@@ -16,7 +16,7 @@ export const Home = () => {
 
   // functions
   const fetchMovies = async () => {
-    const { data } = await axios.get(`https://www.omdbapi.com/?s=${ SearchQ ? SearchQ : 'bank' }${YYYY ? '&y=' + YYYY : ''}&apikey=cfcc70f2`)
+    const { data } = await axios.get(`https://www.omdbapi.com/?s=${ SearchQ ? SearchQ : 'heist' }${YYYY ? '&y=' + YYYY : ''}&apikey=cfcc70f2`)
     setMovies(data.Search)
   }
 
@@ -27,7 +27,7 @@ export const Home = () => {
 
   return (
     <div className='pb-40'>
-      {!YYYY && !SearchQ && <Slide images={images} Right={<hi2.HiChevronRight className='h-10 w-10' />} Left={<hi2.HiChevronLeft className='h-10 w-10' />} Time={3000} />}
+      {!YYYY && !SearchQ && <Slide images={images} Right={<hi2.HiChevronRight className='h-10 w-10' />} Left={<hi2.HiChevronLeft className='h-10 w-10' />} Time={7000} />}
       <YearsScale />
       <section className='grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 justify-items-center w-11/12 max-sm:w-[90%] mx-auto mt-20'>
         {movies.map((movie, i) => (

@@ -11,7 +11,7 @@ export const Slide = ({ images, Right, Left, Button, Time }) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, Time? Time : 3000);
+    }, Time? Time : 7000);
 
     return () => clearInterval(intervalId);
   }, [images]);
