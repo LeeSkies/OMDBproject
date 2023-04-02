@@ -35,21 +35,21 @@ export const Slide = ({ images, Right, Left, Button, Time }) => {
         </button>
       </div>
       <article
-        className='h-full flex items-top transition-transform duration-1000'
+        className='h-full flex overflow-hidden items-top transition-transform duration-1000'
         style={{
           transform: `translateX(-${index * 100/images.length}%)`,
           width: `${images.length * 100}vw`,
         }}
       >
         {images.map((image, i) => (
-          <div key={i} className='relative'>
+          // <div key={i} className='relative'>
             <img
               src={image}
               
-              className='w-screen mx-auto'
+              className='w-full'
               alt={`Slider image ${i + 1}`}
             />
-          </div>
+          // </div>
         ))}
       </article>
       <div className='absolute w-screen bg-transparent z-40 bottom-8 h-[20px] flex justify-center items-center'>
