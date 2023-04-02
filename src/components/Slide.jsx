@@ -18,7 +18,7 @@ export const Slide = ({ images, Right, Left, Button, Time }) => {
 
   return (
     <section className='w-full overflow-hidden bg-transparent relative h-auto xl:h-[90vh]'>
-      <div className='absolute w-screen h-full bg-transparent flex justify-between items-center p-10 z-10'>
+      <div className='absolute w-full h-full bg-transparent flex justify-between items-center p-10 z-10'>
         <button
           onClick={() =>
             setIndex((index) => (index === 0 ? images.length - 1 : index - 1))
@@ -38,18 +38,15 @@ export const Slide = ({ images, Right, Left, Button, Time }) => {
         className='h-full flex overflow-hidden items-top transition-transform duration-1000'
         style={{
           transform: `translateX(-${index * 100/images.length}%)`,
-          width: `${images.length * 100}vw`,
+          width: `${images.length * 100}%`,
         }}
       >
         {images.map((image, i) => (
-          // <div key={i} className='relative'>
-            <img
+            <img key={i}
               src={image}
-              
-              className='w-full'
+              style={{width: `${100/images.length}%`}}
               alt={`Slider image ${i + 1}`}
             />
-          // </div>
         ))}
       </article>
       <div className='absolute w-screen bg-transparent z-40 bottom-8 h-[20px] flex justify-center items-center'>

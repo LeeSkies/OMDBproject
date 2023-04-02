@@ -12,6 +12,7 @@ export const Home = () => {
 
   // states
   const [movies, setMovies] = useState([])
+  const [page, setPage] = useState(0)
 
   // functions
   const fetchMovies = async () => {
