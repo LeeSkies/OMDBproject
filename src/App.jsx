@@ -1,14 +1,15 @@
 import React from 'react'
-// import { CarsContextProvider } from './context/CarsContext'
 import { AppRoutes } from './routes/AppRoutes'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 function App() {
 
   return (
     <div className="App">
-      {/* <CarsContext.Provider> */}
-      <AppRoutes/>
-      {/* </CarsContext.Provider> */}
+      <Provider store = {store} >
+        <AppRoutes/>
+      </Provider>
     </div>
   )
 }
