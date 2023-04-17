@@ -1,33 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as hi2 from 'react-icons/hi2'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
+import { actions } from '../features/restaurantssSlice'
 
 export const Restaurant = () => {
 
+    const dispatch = useDispatch()
     const { id } = useParams()
-    const { restaurants } = useSelector(state => state.restaurants)
+    const { restaurants : r } = useSelector(state => state.restaurants)
+
+    useEffect(() => {
+        dispatch(actions.getSingleRestaurant(id))
+    }, [])
 
   return (
-    <article className={`container md:w-4/6 flex max-md:flex-col absolute border-black justify-between mx-auto left-0 right-0 top-[85%] rounded`}>
+    r && <article className={`container md:w-4/6 flex max-md:flex-col absolute border-black md:gap-8 justify-between mx-auto left-0 right-0 top-[85%] rounded`}>
         <section className='bg-slate-200 rounded'>
             <nav className='p-4 flex items-center'>
                 <NavLink to={'/'} className='flex flex-col items-center'>
                     <hi2.HiHome className='h-6 w-6' />
                     <p>home</p>
                 </NavLink>
-                <NavLink to={`/edit/${id}`} className='px-5 flex flex-col items-center'>
+                <NavLink to={`/restaurant/e/edit/${id}`} className='px-5 flex flex-col items-center'>
                     <hi2.HiPencil className='h-5 w-5' />
                     <p>edit</p>
                 </NavLink>
             </nav>
-            {restaurants?.images?.length &&
+            {r?.images?.length &&
             <section className='p-4'>
-                <h1 className='text-5xl font-bold border-y-slate-300 border-y p-4'>{restaurants.name}</h1>
-                <p className='py-10'>{restaurants.description}</p>
-                <p className='font-bold text-2xl'>{restaurants.images.length} photos</p>
+                <h1 className='text-5xl font-bold border-y-slate-300 border-y p-4'>{r.name}</h1>
+                <p className='py-10'>{r.description}</p>
+                <p className='font-bold text-2xl'>{r.images.length} photos</p>
                 <div className='w-full flex p-4'>
-                    {restaurants.images.map((image, i) => (
+                    {r.images.map((image, i) => (
                         <img src="image" key={i} alt={`image ${i}`} />
                     ))}
                 </div>

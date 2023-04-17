@@ -20,12 +20,12 @@ export const Home = () => {
       dispatch(actions.searchRestaurants(searchParams.get('s'))) :
       dispatch(actions.getRestaurants())
   },[searchParams])
-console.log(restaurants)
+
   return (
     <section className='w-11/12 md:w-[80%] mx-auto my-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5'>
       {restaurants?.length > 0 && restaurants.map((r, i) => (
         <article key={i} className='flex flex-col grow hover:scale-[105%] transition-all duration-300 ease-in-out hover:shadow-xl p-2 border'>
-          <img src={r.images[0]} className='w-[300px]' alt="" />
+          <img src={r.images?.length && r.images[0]} className='w-[300px]' alt="" />
           <div className='flex pt-2 font-semibold items-center justify-between'>
             <h1 className='text-lg'>{r.name}</h1>
             <p>{r.price}</p>

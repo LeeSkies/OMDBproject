@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, useParams } from 'react-router-dom'
 import { Home } from '../components/Home'
 import { MainLayout } from '../layouts/MainLayout'
@@ -16,10 +16,10 @@ export const AppRoutes = () => {
         <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />}/>
         </Route>
-        <Route path='/restaurant/:id' element={<SingleDisplayLayout />} >
-          <Route index element={<Restaurant />}  />
+        <Route path='/restaurant/' element={<SingleDisplayLayout />} >
+          <Route path='/restaurant/:id' element={<Restaurant />}  />
+          <Route path='/restaurant/e/:req/:id?' element={<EditPage />} />
         </Route>
-        <Route path='/edit/:id' element={<EditPage />} />
       </Route>
     )
 )

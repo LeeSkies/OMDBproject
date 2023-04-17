@@ -8,7 +8,6 @@ export const restaurantsSlice = createSlice({
     reducers: {
         setRestaurants: (state, action) => {
             const restaurants = action.payload
-            localStorage.setItem('restaurants', JSON.stringify(restaurants))
         },
         getRestaurants: (state, action) => {
             const restaurants = JSON.parse(localStorage.getItem('restaurants'))
@@ -25,7 +24,6 @@ export const restaurantsSlice = createSlice({
             localStorage.setItem('restaurants', JSON.stringify(state.restaurants))
         },
         searchRestaurants: (state, action) => {
-            console.log(action.payload)
             const restaurants = JSON.parse(localStorage.getItem('restaurants'))
             const filtered = restaurants.filter(restaurant => restaurant.city.toLowerCase().includes(action.payload.toLowerCase()))
             state.restaurants = filtered
@@ -34,22 +32,37 @@ export const restaurantsSlice = createSlice({
             const id = action.payload
             const restaurants = JSON.parse(localStorage.getItem('restaurants'))
             const filtered = restaurants.find(restaurant => restaurant.id == id)
-            console.log(filtered)
             state.restaurants = filtered
         },
-        updateRestaurant: (state, action) => {
-            const updatedRestaurant = action.payload
-            console.log(action.payload)
+        editRestaurant: (state, action) => {
+            const { id, req, r } = action.payload
             const restaurants = JSON.parse(localStorage.getItem('restaurants'))
-            const newRestaurants = restaurants.map(r => {
-                if (r.id == updatedRestaurant.id) {
-                    return updatedRestaurant
+            switch (req) {
+                case 'edit': {
+                    const mapped = restaurants.map(restaurant => {
+                        if (restaurant.id == r.id) {
+                            return {...restaurant, ...r}
+                        }
+                        return restaurant
+                    })
+                    state.restaurants = mapped
+                    localStorage.setItem('restaurants', JSON.stringify(mapped))
+                    break;
                 }
-                return r
-            
-            })
-            localStorage.setItem('restaurants', JSON.stringify(newRestaurants))
-        }
+                case 'delete': {
+                    const filtered = restaurants.filter(restaurant => restaurant.id != id)
+                    state.restaurants = filtered
+                    localStorage.setItem('restaurants', JSON.stringify(filtered))
+                    break;
+                }
+                case 'add': {
+                    const newRestaurant = {...r, id:Date.now()}
+                    const newRestaurants = [...restaurants, newRestaurant]
+                    localStorage.setItem('restaurants', JSON.stringify(newRestaurants))
+                    state.restaurants = newRestaurants
+                    break;
+                }
+            }}
     }
 });
 
