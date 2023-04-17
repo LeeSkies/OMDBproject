@@ -20,6 +20,12 @@ export const EditPage = () => {
   } else {
     r = null;
   }
+  
+  console.log(r)
+
+  // useEffect(() => {
+  //   dispatch(actions.getSingleRestaurant(id))
+  // },[])
 
   return (
     r && <section className='flex justify-center items-center container left-0 right-0 mx-auto rounded absolute bg-gradient-to-l from-blue-800 to-slate-400 top-[85%] overflow-y-hidden p-8' onScrollCapture={(e) => e.preventDefault()}>
