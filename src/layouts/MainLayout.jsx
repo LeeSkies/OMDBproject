@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { NavLink, useSearchParams } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 import { OptModal } from '../components/OptModal';
+import * as hi2 from 'react-icons/hi2'
 
 export const MainLayout = () => {
 
@@ -14,6 +15,7 @@ export const MainLayout = () => {
     <div className={`${modal ? 'h-screen overflow-y-hidden' : ''}`}>
       {modal && <OptModal />}
         <header className='flex justify-center items-center bg-gradient-to-r from-blue-900 to-slate-500 h-[200px] md:h-[300px] flex-col'>
+          <NavLink to={'/manager'} className='absolute top-8 border hover:text-slate-200 hover:bg-slate-800 duration-300 border-slate-800 right-8 p-4'><hi2.HiPuzzlePiece className='w-8 h-8' /></NavLink>
           <section className='p-4'>
             <h1 className='text-slate-100 text-2xl sm:text-4xl px-2 pb-6 md:pb-8 font-bold'>Find your table for any occasion</h1>
             <article className='flex items-center w-full justify-center'>

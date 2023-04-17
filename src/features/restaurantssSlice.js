@@ -18,11 +18,6 @@ export const restaurantsSlice = createSlice({
             state.restaurants.push(newImage)
             localStorage.setItem('restaurants', JSON.stringify(state.restaurants))
         },
-        deleteRestaurants: (state, action) => {
-            const { name } = action.payload
-            state.restaurants = state.restaurants.filter(restaurant => restaurant.name !== name)
-            localStorage.setItem('restaurants', JSON.stringify(state.restaurants))
-        },
         searchRestaurants: (state, action) => {
             const restaurants = JSON.parse(localStorage.getItem('restaurants'))
             const filtered = restaurants.filter(restaurant => restaurant.city.toLowerCase().includes(action.payload.toLowerCase()))

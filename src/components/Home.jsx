@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../features/restaurantssSlice'
-import { useIsMounted } from '../hooks/useIsMounted'
-
-
 
 export const Home = () => {
   const dispatch = useDispatch()

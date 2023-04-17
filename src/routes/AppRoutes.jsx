@@ -7,6 +7,8 @@ import { SingleDisplayLayout } from '../layouts/SingleDisplayLayout'
 import { actions } from '../features/restaurantssSlice'
 import { Restaurant } from '../components/Restaurant'
 import { EditPage } from '../components/EditPage'
+import { ManagerLayout } from '../layouts/ManagerLayout'
+import { Manager } from '../components/Manager'
 
 export const AppRoutes = () => {
 
@@ -19,6 +21,9 @@ export const AppRoutes = () => {
         <Route path='/restaurant/' element={<SingleDisplayLayout />} >
           <Route path='/restaurant/:id' element={<Restaurant />}  />
           <Route path='/restaurant/e/:req/:id?' element={<EditPage />} />
+        </Route>
+        <Route path='/manager' element={<ManagerLayout />} >
+          <Route index element={<Manager />} />
         </Route>
       </Route>
     )
