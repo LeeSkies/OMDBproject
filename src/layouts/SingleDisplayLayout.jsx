@@ -23,7 +23,7 @@ export const SingleDisplayLayout = () => {
           <h1 className='p-4 text-3xl md:text-5xl font-bold text-slate-100'>{restaurants?.name ? restaurants.name : 'Add a Restaurant'}</h1>
           {req && <NavLink to={'/'} className='hover:underline text-slate-800'>go back to homepage</NavLink>}
       </header>
-      <Outlet id={id} />
+      <Outlet />
     </div>
   )
 }

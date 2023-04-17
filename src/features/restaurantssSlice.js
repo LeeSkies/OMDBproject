@@ -14,13 +14,15 @@ export const restaurantsSlice = createSlice({
             state.restaurants = restaurants
         },
         addRestaurants: (state, action) => {
-            const newImage = action.payload
-            state.restaurants.push(newImage)
+            const newRestaurant = action.payload
+            state.restaurants?.length ? state.restaurants.push(newRestaurant) : state.restaurants = [newImage]
             localStorage.setItem('restaurants', JSON.stringify(state.restaurants))
         },
         searchRestaurants: (state, action) => {
             const restaurants = JSON.parse(localStorage.getItem('restaurants'))
-            const filtered = restaurants.filter(restaurant => restaurant.city.toLowerCase().includes(action.payload.toLowerCase()))
+            let filtered
+            if(state.restaurants?.length)
+                filtered = restaurants.filter(restaurant => restaurant.city.toLowerCase().includes(action.payload.toLowerCase()))
             state.restaurants = filtered
         },
         getSingleRestaurant: (state, action) => {
@@ -28,6 +30,7 @@ export const restaurantsSlice = createSlice({
             const restaurants = JSON.parse(localStorage.getItem('restaurants'))
             const filtered = restaurants.find(restaurant => restaurant.id == id)
             state.restaurants = filtered
+            console.log(state.restaurants)
         },
         editRestaurant: (state, action) => {
             const { id, req, r } = action.payload
@@ -52,7 +55,7 @@ export const restaurantsSlice = createSlice({
                 }
                 case 'add': {
                     const newRestaurant = {...r, id:Date.now()}
-                    const newRestaurants = [...restaurants, newRestaurant]
+                    const newRestaurants = restaurants?.length ? [...restaurants, newRestaurant] : [newRestaurant]
                     localStorage.setItem('restaurants', JSON.stringify(newRestaurants))
                     state.restaurants = newRestaurants
                     break;

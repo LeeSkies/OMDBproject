@@ -9,6 +9,7 @@ export const Restaurant = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const { restaurants : r } = useSelector(state => state.restaurants)
+    console.log(r)
 
     useEffect(() => {
         dispatch(actions.getSingleRestaurant(id))
@@ -16,7 +17,7 @@ export const Restaurant = () => {
 
   return (
     r && <article className={`container md:w-4/6 flex max-md:flex-col absolute border-black md:gap-8 justify-between mx-auto left-0 right-0 top-[85%] rounded`}>
-        <section className='bg-slate-200 rounded'>
+        <section className='bg-slate-200 rounded flex flex-col grow'>
             <nav className='p-4 flex items-center'>
                 <NavLink to={'/'} className='flex flex-col items-center'>
                     <hi2.HiHome className='h-6 w-6' />
@@ -27,13 +28,13 @@ export const Restaurant = () => {
                     <p>edit</p>
                 </NavLink>
             </nav>
-            {r?.images?.length &&
+            {r &&
             <section className='p-4'>
                 <h1 className='text-5xl font-bold border-y-slate-300 border-y p-4'>{r.name}</h1>
                 <p className='py-10'>{r.description}</p>
-                <p className='font-bold text-2xl'>{r.images.length} photos</p>
+                <p className='font-bold text-2xl'>{r?.images?.length ? r.images.length : '0'} photos</p>
                 <div className='w-full flex p-4'>
-                    {r.images.map((image, i) => (
+                    {r?.images?.length && r.images.map((image, i) => (
                         <img src="image" key={i} alt={`image ${i}`} />
                     ))}
                 </div>
